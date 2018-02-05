@@ -1,0 +1,146 @@
+<resources>
+    <string name="app_name">MockTimer</string>
+    <string name="btn_start">開始</string>
+    <string name="btn_pause">暫停</string>
+    <string name="btn_continue">繼續</string>
+    <string name="text_select">選擇…</string>
+    <string name="label_exam">考試</string>
+    <string name="label_subj">科目</string>
+    <string name="label_paper">試卷</string>
+    <string name="btn_reset">重設</string>
+    <string name="text_exam_hkdse">HKDSE - 香港中學文憑考試</string>
+    <string name="text_subject_hkdse_chin">中國語文</string>
+    <string name="text_subject_hkdse_eng">英國語文</string>
+    <string name="text_subject_hkdse_math">"數學 "</string>
+    <string name="text_subject_hkdse_ls">通識教育</string>
+    <string name="text_paper_hkdse_chin1">卷一 - 閱讀</string>
+    <string name="text_paper_hkdse_chin2">卷二 - 寫作</string>
+    <string name="text_paper_hkdse_chin3">卷三 - 聆聽及綜合能力考核</string>
+    <string name="text_paper_hkdse_chin4">卷四 - 說話</string>
+    <string name="text_paper_hkdse_eng1">卷一 - 閱讀</string>
+    <string name="text_paper_hkdse_eng2">卷二 - 寫作</string>
+    <string name="text_paper_hkdse_eng3">卷三 - 聆聽及綜合能力考核</string>
+    <string name="text_paper_hkdse_eng4">卷四 - 說話</string>
+    <string name="text_paper_hkdse_math1">卷一 - 長答題</string>
+    <string name="text_paper_hkdse_math2">卷二 - 多項選擇題</string>
+    <string name="text_paper_hkdse_ls2">卷二 - 延伸回應題</string>
+    <string name="text_paper_hkdse_ls1">卷一  - 資料回應題</string>
+    <string name="text_select_first">請先選擇試卷</string>
+    <string name="text_subject_hkdse_m2">數學延伸部分（M1 / M2）</string>
+    <string name="text_subject_hkdse_ict">資訊及通訊科技</string>
+    <string name="text_subject_hkdse_phy">物理</string>
+    <string name="text_subject_hkdse_chem">化學</string>
+    <string name="text_subject_hkdse_bio">生物</string>
+    <string name="text_subject_hkdse_econ">經濟</string>
+    <string name="text_subject_hkdse_bafs">企業、會計與財務概論</string>
+    <string name="text_subject_hkdse_geog">地理</string>
+    <string name="text_subject_hkdse_chist">中國歷史</string>
+    <string name="text_subject_hkdse_hist">歷史</string>
+    <string name="text_subject_hkdse_clit">中國文學</string>
+    <string name="text_subject_hkdse_elit">英語文學</string>
+    <string name="text_subject_hkdse_dat">設計與應用科技</string>
+    <string name="text_subject_hkdse_tl">科技與生活</string>
+    <string name="text_paper_hkdse_m2">M1/M2</string>
+    <string name="text_paper_hkdse_ict2">卷二 - 選修部分</string>
+    <string name="text_paper_hkdse_ict1">卷一 - 必修部分</string>
+    <string name="text_paper_hkdse_phy2">卷二 - 選修部分</string>
+    <string name="text_paper_hkdse_chem2">卷二 - 選修部分</string>
+    <string name="text_paper_hkdse_bio2">卷二 - 選修部分</string>
+    <string name="text_paper_hkdse_phy1">卷一 - 必修部分</string>
+    <string name="text_paper_hkdse_chem1">卷一 - 必修部分</string>
+    <string name="text_paper_hkdse_bio1">卷一 - 必修部分</string>
+    <string name="text_paper_hkdse_econ1">卷一</string>
+    <string name="text_paper_hkdse_bafs1">卷一</string>
+    <string name="text_paper_hkdse_geog1">卷一</string>
+    <string name="text_paper_hkdse_chist1">卷一</string>
+    <string name="text_paper_hkdse_hist1">卷一</string>
+    <string name="text_paper_hkdse_clit1">卷一</string>
+    <string name="text_paper_hkdse_elit1">卷一</string>
+    <string name="text_paper_hkdse_dat1">卷一</string>
+    <string name="text_paper_hkdse_tl1">卷一</string>
+    <string name="text_paper_hkdse_econ2">卷二</string>
+    <string name="text_paper_hkdse_bafs2">卷二</string>
+    <string name="text_paper_hkdse_geog2">卷二</string>
+    <string name="text_paper_hkdse_chist2">卷二</string>
+    <string name="text_paper_hkdse_hist2">卷二</string>
+    <string name="text_paper_hkdse_clit2">卷二</string>
+    <string name="text_paper_hkdse_elit2">卷二</string>
+    <string name="text_paper_hkdse_dat2">卷二</string>
+    <string name="text_paper_hkdse_tl2">卷二</string>
+    <string name="text_exam_date_placeholder">此處將顯示實際考試日期</string>
+    <string name="text_exam_date">考試日期: %s %s</string>
+    <string name="text_exam_date_variable">視乎個別考生</string>
+    <string name="settings">設置</string>
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+</resources>

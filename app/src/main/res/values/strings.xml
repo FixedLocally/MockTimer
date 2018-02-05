@@ -1,0 +1,147 @@
+<resources>
+    <string name="app_name">MockTimer</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_pause">Pause</string>
+    <string name="btn_continue">Continue</string>
+    <string name="text_select">Select…</string>
+    <string name="label_exam">Exam</string>
+    <string name="label_subj">Subject</string>
+    <string name="label_paper">Paper</string>
+    <string name="btn_reset">Reset</string>
+    <string name="text_select_first">Select a paper before startiung the timer</string>
+    <string name="text_exam_date_placeholder">Actual examination date goes here</string>
+    <string name="text_exam_date">Examination date and time: %s %s</string>
+    <string name="text_exam_date_variable">Different for each candidate</string>
+    <string name="text_exam_hkdse">HKDSE - Hong Kong Diploma of Secondary Education</string>
+    <string name="text_subject_hkdse_chin">Chinese Language</string>
+    <string name="text_subject_hkdse_eng">English Language</string>
+    <string name="text_subject_hkdse_math">Mathematics</string>
+    <string name="text_subject_hkdse_ls">Liberal Studies</string>
+    <string name="text_subject_hkdse_m2">Mathematics Extended Part (M1/M2)</string>
+    <string name="text_subject_hkdse_ict">Information &amp; Communication Technology</string>
+    <string name="text_subject_hkdse_phy">Physics</string>
+    <string name="text_subject_hkdse_chem">Chemistry</string>
+    <string name="text_subject_hkdse_bio">Biology</string>
+    <string name="text_subject_hkdse_econ">Economics</string>
+    <string name="text_subject_hkdse_bafs">Business, Accounting and Financial Studies</string>
+    <string name="text_subject_hkdse_geog">Geography</string>
+    <string name="text_subject_hkdse_chist">Chinese History</string>
+    <string name="text_subject_hkdse_hist">History</string>
+    <string name="text_subject_hkdse_clit">Chinese Literature</string>
+    <string name="text_subject_hkdse_elit">Literature in English</string>
+    <string name="text_subject_hkdse_dat">Design and Applied Technology</string>
+    <string name="text_subject_hkdse_tl">Technology &amp; Living</string>
+    <string name="text_paper_hkdse_chin1">Paper 1 - Reading</string>
+    <string name="text_paper_hkdse_chin2">Paper 2 - Writing</string>
+    <string name="text_paper_hkdse_chin3">Paper 3 - Listening and Integrated Skills</string>
+    <string name="text_paper_hkdse_chin4">Paper 4 - Speaking</string>
+    <string name="text_paper_hkdse_eng1">Paper 1 - Reading</string>
+    <string name="text_paper_hkdse_eng2">Paper 2 - Writing</string>
+    <string name="text_paper_hkdse_eng3">Paper 3 - Listening and Integrated Skills</string>
+    <string name="text_paper_hkdse_eng4">Paper 4 - Speaking</string>
+    <string name="text_paper_hkdse_math1">Paper 1 - Structured Questions</string>
+    <string name="text_paper_hkdse_math2">Paper 2 - Multiple Choice</string>
+    <string name="text_paper_hkdse_ls1">Paper 1 - Data-response Questions</string>
+    <string name="text_paper_hkdse_ls2">Paper 2 - Extended Response Questions</string>
+    <string name="text_paper_hkdse_m2">M1/M2</string>
+    <string name="text_paper_hkdse_ict2">Paper 2 - Elective Module</string>
+    <string name="text_paper_hkdse_ict1">Paper 1 - Compulsory Part</string>
+    <string name="text_paper_hkdse_phy2">Paper 2 - Elective Part</string>
+    <string name="text_paper_hkdse_phy1">Paper 1 - Compulsory Part</string>
+    <string name="text_paper_hkdse_chem2">Paper 2 - Elective Part</string>
+    <string name="text_paper_hkdse_chem1">Paper 1 - Compulsory Part</string>
+    <string name="text_paper_hkdse_bio2">Paper 2 - Elective Part</string>
+    <string name="text_paper_hkdse_bio1">Paper 1 - Compulsory Part</string>
+    <string name="text_paper_hkdse_econ2">Paper 2</string>
+    <string name="text_paper_hkdse_econ1">Paper 1</string>
+    <string name="text_paper_hkdse_bafs2">Paper 2</string>
+    <string name="text_paper_hkdse_bafs1">Paper 1</string>
+    <string name="text_paper_hkdse_geog2">Paper 2</string>
+    <string name="text_paper_hkdse_geog1">Paper 1</string>
+    <string name="text_paper_hkdse_chist2">Paper 2</string>
+    <string name="text_paper_hkdse_chist1">Paper 1</string>
+    <string name="text_paper_hkdse_hist2">Paper 2</string>
+    <string name="text_paper_hkdse_hist1">Paper 1</string>
+    <string name="text_paper_hkdse_clit2">Paper 2</string>
+    <string name="text_paper_hkdse_clit1">Paper 1</string>
+    <string name="text_paper_hkdse_elit2">Paper 2</string>
+    <string name="text_paper_hkdse_elit1">Paper 1</string>
+    <string name="text_paper_hkdse_dat2">Paper 2</string>
+    <string name="text_paper_hkdse_dat1">Paper 1</string>
+    <string name="text_paper_hkdse_tl2">Paper 2</string>
+    <string name="text_paper_hkdse_tl1">Paper 1</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+</resources>
