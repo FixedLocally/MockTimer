@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="my_exam"
+        android:title="@string/text_exam" />
+    <MultiSelectListPreference
+        android:id="@+id/my_subjects"
+        android:defaultValue="@array/list_preference_entry_values"
+        android:dependency="my_exam"
+        android:entries="@array/list_preference_entry_values"
+        android:entryValues="@array/list_preference_entries"
+        android:key="my_subjects"
+        android:title="@string/text_subjects" />
+</PreferenceScreen>

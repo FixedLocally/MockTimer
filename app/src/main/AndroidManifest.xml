@@ -26,5 +26,4 @@
                 android:value="me.lkp111138.examtimer.MainActivity" />
         </activity>
     </application>
-
 </manifest>

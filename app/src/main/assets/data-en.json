@@ -1,0 +1,295 @@
+{
+  "exams": [
+    {
+      "name": "HKDSE - Hong Kong Diploma of Secondary Education",
+      "abbr": "",
+      "subjects": [
+        {
+          "name": "Chinese Language",
+          "papers": [
+            {
+              "name": "Paper 1 - Reading",
+              "limit": 5400000,
+              "examdate": 1523233800000
+            },
+            {
+              "name": "Paper 2 - Writing",
+              "limit": 5400000,
+              "examdate": 1523241900000
+            },
+            {
+              "name": "Paper 3 - Listening and Integrated Skills",
+              "limit": 4500000,
+              "examdate": 1523322900000
+            },
+            {
+              "name": "Paper 4 - Speaking",
+              "limit": 900000,
+              "examdate": -1
+            }
+          ]
+        },
+        {
+          "name": "English Language",
+          "papers": [
+            {
+              "name": "Paper 1 - Reading",
+              "limit": 5400000,
+              "examdate": 1523579400000
+            },
+            {
+              "name": "Paper 2 - Writing",
+              "limit": 7200000,
+              "examdate": 1523588400000
+            },
+            {
+              "name": "Paper 3 - Listening and Integrated Skills",
+              "limit": 4500000,
+              "examdate": 1523668500000
+            },
+            {
+              "name": "Paper 4 - Speaking",
+              "limit": 480000,
+              "examdate": -1
+            }
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "papers": [
+            {
+              "name": "Paper 1 - Structured Questions",
+              "limit": 8100000,
+              "examdate": 1523838600000
+            },
+            {
+              "name": "Paper 2 - Multiple Choice",
+              "limit": 4500000,
+              "examdate": 1523849400000
+            }
+          ]
+        },
+        {
+          "name": "Liberal Studies",
+          "papers": [
+            {
+              "name": "Paper 1 - Data-response Questions",
+              "limit": 7200000,
+              "examdate": 1523406600000
+            },
+            {
+              "name": "Paper 2 - Extended Response Questions",
+              "limit": 4500000,
+              "examdate": 1523416500000
+            }
+          ]
+        },
+        {
+          "name": "Mathematics Extended Part (M1\/M2)",
+          "papers": [
+            {
+              "name": "M1\/M2",
+              "limit": 9000000,
+              "examdate": 1524875400000
+            }
+          ]
+        },
+        {
+          "name": "Information & Communication Technology",
+          "papers": [
+            {
+              "name": "Paper 1 - Compulsory Part",
+              "limit": 7200000,
+              "examdate": 1523061000000
+            },
+            {
+              "name": "Paper 2 - Elective Module",
+              "limit": 5400000,
+              "examdate": 1523070900000
+            }
+          ]
+        },
+        {
+          "name": "Physics",
+          "papers": [
+            {
+              "name": "Paper 1 - Compulsory Part",
+              "limit": 9000000,
+              "examdate": 1524011400000
+            },
+            {
+              "name": "Paper 2 - Elective Part",
+              "limit": 3600000,
+              "examdate": 1524023100000
+            }
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "papers": [
+            {
+              "name": "Paper 1 - Compulsory Part",
+              "limit": 9000000,
+              "examdate": 1524443400000
+            },
+            {
+              "name": "Paper 2 - Elective Part",
+              "limit": 3600000,
+              "examdate": 1524455100000
+            }
+          ]
+        },
+        {
+          "name": "Biology",
+          "papers": [
+            {
+              "name": "Paper 1 - Compulsory Part",
+              "limit": 9000000,
+              "examdate": 1522974600000
+            },
+            {
+              "name": "Paper 2 - Elective Part",
+              "limit": 3600000,
+              "examdate": 1522986300000
+            }
+          ]
+        },
+        {
+          "name": "Economics",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 3600000,
+              "examdate": 1525048200000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 8100000,
+              "examdate": 1525054500000
+            }
+          ]
+        },
+        {
+          "name": "Business, Accounting and Financial Studies",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 4500000,
+              "examdate": 1524616200000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 8100000,
+              "examdate": 1524623400000
+            }
+          ]
+        },
+        {
+          "name": "Geography",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 9000000,
+              "examdate": 1524789000000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 4500000,
+              "examdate": 1524800700000
+            }
+          ]
+        },
+        {
+          "name": "Chinese History",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 8100000,
+              "examdate": 1524789000000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 4800000,
+              "examdate": 1524799800000
+            }
+          ]
+        },
+        {
+          "name": "History",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 7200000,
+              "examdate": 1524270600000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 5400000,
+              "examdate": 1524280500000
+            }
+          ]
+        },
+        {
+          "name": "Chinese Literature",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 7200000,
+              "examdate": 1522715400000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 7200000,
+              "examdate": 1522725300000
+            }
+          ]
+        },
+        {
+          "name": "Literature in English",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 10800000,
+              "examdate": 1522801800000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 7200000,
+              "examdate": 1522819800000
+            }
+          ]
+        },
+        {
+          "name": "Design and Applied Technology",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 7200000,
+              "examdate": 1522801800000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 7200000,
+              "examdate": 1522811700000
+            }
+          ]
+        },
+        {
+          "name": "Technology & Living",
+          "papers": [
+            {
+              "name": "Paper 1",
+              "limit": 5400000,
+              "examdate": 1523925000000
+            },
+            {
+              "name": "Paper 2",
+              "limit": 7200000,
+              "examdate": 1523933100000
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

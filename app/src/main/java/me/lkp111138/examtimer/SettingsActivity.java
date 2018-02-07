@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBar;
@@ -21,6 +22,12 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
 import java.util.List;
+
+
+import me.lkp111138.examtimer.objects.DataLoader;
+import me.lkp111138.examtimer.objects.Exam;
+import me.lkp111138.examtimer.objects.Subject;
+
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -34,6 +41,12 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+    static SettingsActivity instance;
+    private boolean need_reload = false;
+
+    public void setNeed_reload(boolean need_reload) {
+        this.need_reload = need_reload;
+    }
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -121,6 +134,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+        instance = this;
     }
 
     /**
@@ -169,9 +183,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+                || AlarmPreferenceFragment.class.getName().equals(fragmentName)
+                || AboutFragment.class.getName().equals(fragmentName)
+                || PersonalizePrefFragment.class.getName().equals(fragmentName);
     }
 
     /**
@@ -179,7 +193,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * activity is showing a two-pane settings UI.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
+    public static class AlarmPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -190,8 +204,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
+            bindPreferenceSummaryToValue(findPreference("ringtone"));
+            //bindPreferenceSummaryToValue(findPreference("silent"));
         }
 
         @Override
@@ -205,23 +219,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * This fragment shows notification preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class NotificationPreferenceFragment extends PreferenceFragment {
+    public static class AboutFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_notification);
+            addPreferencesFromResource(R.xml.pref_about);
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+            //bindPreferenceSummaryToValue(findPreference("ringtone"));
+            //bindPreferenceSummaryToValue(findPreference("silent"));
         }
 
         @Override
@@ -235,23 +245,99 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class DataSyncPreferenceFragment extends PreferenceFragment {
+    public static class PersonalizePrefFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_data_sync);
+            addPreferencesFromResource(R.xml.pref_personalize);
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+            bindPreferenceSummaryToValue(findPreference("my_exam"));
+            //bindPreferenceSummaryToValue(findPreference("silent"));
+
+            final ListPreference exam = (ListPreference) findPreference("my_exam");
+            final MultiSelectListPreference subjects = (MultiSelectListPreference) findPreference("my_subjects");
+            Exam[] exams = DataLoader.getExams();
+            String[] entries = new String[exams.length + 1];
+            String[] values = new String[exams.length + 1];
+            for (int i = 0; i <= exams.length; ++i) {
+                if (i == 0) {
+                    entries[i] = getString(R.string.text_not_selected);
+                    values[i] = "";
+                } else {
+                    entries[i] = exams[i - 1].getName();
+                    values[i] = String.valueOf(exams[i - 1].getId());
+                }
+            }
+            exam.setEntries(entries);
+            exam.setEntryValues(values);
+            exam.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.equals("")) { // 0x7cf00000
+                        subjects.setEnabled(false);
+                        instance.setNeed_reload(false);
+                    } else {
+                        int a = Integer.parseInt(newValue.toString());
+                        Exam _exam = (Exam) DataLoader.getObject(a);
+                        Subject[] _subjects = _exam.getSubjects().toArray(new Subject[0]);
+                        String[] entries = new String[_subjects.length];
+                        String[] values = new String[_subjects.length];
+                        for (int i = 0; i < _subjects.length; ++i) {
+                            entries[i] = _subjects[i].getName();
+                            values[i] = String.valueOf(_subjects[i].getId());
+                        }
+                        subjects.setEntries(entries);
+                        subjects.setEntryValues(values);
+                        subjects.setEnabled(true);
+                    }
+                    return true;
+                }
+            });
+            // subjects
+            try {
+                int a = Integer.parseInt(exam.getValue());
+                Exam _exam = (Exam) DataLoader.getObject(a);
+                Subject[] _subjects = _exam.getSubjects().toArray(new Subject[0]);
+                entries = new String[_subjects.length];
+                values = new String[_subjects.length];
+                for (int i = 0; i < _subjects.length; ++i) {
+                    entries[i] = _subjects[i].getName();
+                    values[i] = String.valueOf(_subjects[i].getId());
+                }
+                subjects.setEntries(entries);
+                subjects.setEntryValues(values);
+            } catch (NumberFormatException|NullPointerException e) { //pref not set or pref is empty
+                subjects.setEnabled(false);
+            }
+            subjects.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                public boolean onPreferenceClick(Preference preference) {
+                    int a = Integer.parseInt(exam.getValue());
+                    Exam exam = (Exam) DataLoader.getObject(a);
+                    Subject[] _subjects = exam.getSubjects().toArray(new Subject[0]);
+                    String[] entries = new String[_subjects.length];
+                    String[] values = new String[_subjects.length];
+                    for (int i = 0; i < _subjects.length; ++i) {
+                        entries[i] = _subjects[i].getName();
+                        values[i] = String.valueOf(_subjects[i].getId());
+                    }
+                    subjects.setEntries(entries);
+                    subjects.setEntryValues(values);
+                    //open browser or intent here
+                    return true;
+                }
+            });
+            subjects.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    instance.setNeed_reload(true);
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -262,6 +348,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 return true;
             }
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        if (need_reload) {
+            DataLoader.init();
         }
     }
 }

@@ -72,20 +72,13 @@
     <string name="text_exam_date_variable">視乎個別考生</string>
     <string name="settings">設置</string>
     <string name="title_activity_settings">設置</string>
-    <string name="pref_header_general">General</string>
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">"Recommendations for people to contact         based on your message history     "</string>
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-    <string name="pref_header_notifications">Notifications</string>
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-    <string name="pref_title_vibrate">Vibrate</string><!-- Strings related to Settings -->
+    <string name="pref_header_general">響鈴</string>
+    <string name="pref_title_silent">自修室模式</string>
+    <string name="pref_description_silent">全部靜音</string>
+    <string name="pref_title_ringtone">鈴聲</string>
+    <string name="pref_ringtone_silent">無聲</string>
+    <string name="pref_title_vibrate">震動</string>
+    <string name="pref_header_about">關於</string><!-- Strings related to Settings -->
 
     <string-array name="pref_example_list_titles">
         <item>Always</item>
@@ -128,5 +121,15 @@
     </string-array>
 
     <string-array name="multi_select_list_preference_default_value" />
+    <string name="pref_header_personalize">個人化</string>
+    <string name="json_file">data-zh.json</string>
+    <string name="text_subjects">選擇科目</string>
+    <string name="text_exam">選擇考試</string>
+    <string name="text_about_header">關於本應用程式</string>
+    <string name="text_app_desc">MockTimer v1.3</string>
+    <string name="text_ringtone">鈴聲</string>
+    <string name="text_not_selected">未選擇</string>
+    <string name="text_author">作者</string>
+    <string name="text_author_desc">lkp111138 https://lkp111138.me</string>
 </resources>
 

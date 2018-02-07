@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:selectable="false"
+        android:enabled="true"
+        android:key="example_key"
+        android:title="@string/text_about_header"
+        android:summary="@string/text_app_desc" />
+    <Preference
+        android:id="@+id/preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:key="example_key"
+        android:selectable="false"
+        android:summary="@string/text_author_desc"
+        android:title="@string/text_author" />
+</PreferenceScreen>
