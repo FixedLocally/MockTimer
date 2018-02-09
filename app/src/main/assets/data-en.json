@@ -3,6 +3,19 @@
     {
       "name": "HKDSE - Hong Kong Diploma of Secondary Education",
       "abbr": "",
+      "tts": true,
+      "tts_text": {
+        "en": [
+          "en-15mins.wav",
+          "en-5mins.wav",
+          "en-0mins.wav"
+        ],
+        "zh": [
+          "zh-15mins.mp3",
+          "zh-5mins.mp3",
+          "zh-0mins.mp3"
+        ]
+      },
       "subjects": [
         {
           "name": "Chinese Language",
@@ -25,7 +38,26 @@
             {
               "name": "Paper 4 - Speaking",
               "limit": 900000,
-              "examdate": -1
+              "examdate": -1,
+              "tts": false
+            },
+            {
+              "name": "Paper 8 - Test",
+              "limit": 905000,
+              "examdate": -1,
+              "tts": true
+            },
+            {
+              "name": "Paper 9 - Test",
+              "limit": 310000,
+              "examdate": -1,
+              "tts": true
+            },
+            {
+              "name": "Paper 99 - Test",
+              "limit": 3000,
+              "examdate": -1,
+              "tts": true
             }
           ]
         },
@@ -50,7 +82,8 @@
             {
               "name": "Paper 4 - Speaking",
               "limit": 480000,
-              "examdate": -1
+              "examdate": -1,
+              "tts": false
             }
           ]
         },

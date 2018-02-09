@@ -1,10 +1,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:key="silent"
+        android:disableDependentsState="true"
         android:summary="@string/pref_description_silent"
         android:title="@string/pref_title_silent" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:dependency="silent"
+        android:key="enable_tts"
+        android:summary="@string/pref_description_tts"
+        android:title="@string/pref_title_tts" />
     <RingtonePreference
         android:defaultValue=""
         android:key="ringtone"

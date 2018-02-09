@@ -20,7 +20,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import me.lkp111138.examtimer.MainActivity;
@@ -52,16 +55,25 @@ public final class DataLoader {
         JSONArray _exams = obj.getJSONArray("exams");
         for (int i = 0; i < _exams.length(); ++i) {
             JSONObject _exam = _exams.getJSONObject(i);
-            Exam exam = new Exam(_exam.getString("name"), _exam.getString("abbr"));
+            JSONObject _tts_text = _exam.getJSONObject("tts_text");
+            Map<String, String[]> tts_text = new HashMap<>();
+            String key;
+            Iterator<String> it = _tts_text.keys();
+            while (it.hasNext()) {
+                key = it.next();
+                JSONArray a = _tts_text.getJSONArray(key);
+                tts_text.put(key, new String[]{a.getString(0), a.getString(1), a.getString(2)});
+            }
+            Exam exam = new Exam(_exam.getString("name"), _exam.getString("abbr"), _exam.getBoolean("tts"), tts_text);
             JSONArray subjects = _exam.getJSONArray("subjects");
             for (int j = 0; j < subjects.length(); ++j) {
                 JSONObject subject = subjects.getJSONObject(j);
-                Subject s = exam.addSubject(subject.getString("name"));
+                Subject s = exam.addSubject(subject.getString("name"), subject.optBoolean("tts", exam.isTtsEnabled()));
                 objects.append(s.getId(), s);
                 JSONArray papers = subject.getJSONArray("papers");
                 for (int k = 0; k < papers.length(); ++k) {
                     JSONObject paper = papers.getJSONObject(k);
-                    Paper p = s.addPaper(paper.getString("name"), paper.getInt("limit"), paper.getLong("examdate"));
+                    Paper p = s.addPaper(paper.getString("name"), paper.getInt("limit"), paper.getLong("examdate"), paper.optBoolean("tts", s.isTtsEnabled()));
                     objects.append(p.getId(), p);
                 }
             }
@@ -195,18 +207,13 @@ public final class DataLoader {
     /* get all visible exams */
     @NonNull
     public static Exam[] getExams() {
-        if (true || visibleExams == null) {
-            ArrayList<Exam> list = new ArrayList<>();
-            for (Exam exam : exams) {
-                if (!exam.isHidden()) {
-                    list.add(exam);
-                }
+        ArrayList<Exam> list = new ArrayList<>();
+        for (Exam exam : exams) {
+            if (!exam.isHidden()) {
+                list.add(exam);
             }
-            visibleExams = list;
-            return list.toArray(new Exam[0]);
-        } else {
-            return visibleExams.toArray(new Exam[0]);
         }
+        return list.toArray(new Exam[0]);
     }
 
     private static String[] getExamStrings() {
@@ -291,6 +298,7 @@ public final class DataLoader {
                 // update stuff
                 Paper selected = getPapers(positions[0] - 1, positions[1] - 1)[positions[2] - 1];
                 context.setInit_msToCount(selected.getTimeLimit(), new LOL());
+                context.setPaper(selected, new LOL());
                 ((TextView) context.findViewById(R.id.exam_date)).setText(context.gen_exam_date(selected.getAt()));
                 context.onReset(null);
         }
@@ -306,6 +314,10 @@ public final class DataLoader {
 
     public static class LOL {
         private LOL() {
+        }
+
+        public void fuckme() {
+
         }
     }
 }

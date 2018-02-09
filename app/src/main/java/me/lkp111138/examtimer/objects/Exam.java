@@ -1,6 +1,8 @@
 package me.lkp111138.examtimer.objects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by user on 2/5/18.
@@ -11,23 +13,29 @@ public class Exam implements StandardObject {
     private int nextSubjectId = 1;
     private int id; // 0x7cfxx000
     private ArrayList<Subject> subjects = new ArrayList<>();
-    private ArrayList<Subject> visibleSubjects = null;
     private String name;
     private String abbr;
     private boolean hidden;
+    private boolean ttsEnabled;
+    private Map<String, String[]> tts_text = new HashMap<>();
 
     private Exam() {
     }
 
-    public Exam(String name, String abbr) {
+    Exam(String name, String abbr, boolean tts, Map<String, String[]> tts_text) {
         this.name = name;
         this.abbr = abbr;
+        this.ttsEnabled = tts;
+        this.tts_text = tts_text;
         this.id = 0x7cf00000 + (nextId << 12);
         ++nextId;
     }
 
-    public Subject addSubject(String name) {
-        Subject s = new Subject(this, name);
+    Subject addSubject(String name, Boolean tts) {
+        if (tts == null) {
+            tts = ttsEnabled;
+        }
+        Subject s = new Subject(this, name, tts);
         this.subjects.add(s);
         ++nextSubjectId;
         return s;
@@ -41,19 +49,14 @@ public class Exam implements StandardObject {
         return subjects;
     }
 
-    public Subject[] getVisibleSubjects() {
-        if (true || visibleSubjects == null) {
-            ArrayList<Subject> list = new ArrayList<>();
-            for (Subject subject : subjects) {
-                if (!subject.isHidden()) {
-                    list.add(subject);
-                }
+    Subject[] getVisibleSubjects() {
+        ArrayList<Subject> list = new ArrayList<>();
+        for (Subject subject : subjects) {
+            if (!subject.isHidden()) {
+                list.add(subject);
             }
-            visibleSubjects = list;
-            return list.toArray(new Subject[0]);
-        } else {
-            return visibleSubjects.toArray(new Subject[0]);
         }
+        return list.toArray(new Subject[0]);
     }
 
     public String getName() {
@@ -78,5 +81,13 @@ public class Exam implements StandardObject {
 
     public boolean isHidden() {
         return hidden;
+    }
+
+    public boolean isTtsEnabled() {
+        return ttsEnabled;
+    }
+
+    public Map<String, String[]> getTtsText() {
+        return tts_text;
     }
 }

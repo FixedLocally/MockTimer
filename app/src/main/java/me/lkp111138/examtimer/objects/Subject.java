@@ -10,22 +10,26 @@ public class Subject implements StandardObject {
     private int nextPaperId = 1;
     private int id; // 0x7cfxxyy0
     private ArrayList<Paper> papers = new ArrayList<>();
-    private ArrayList<Paper> visiblePapers = null;
     private String name;
     private Exam parent;
     private boolean hidden = false;
+    private boolean ttsEnabled;
 
     private Subject() {
     }
 
-    Subject(Exam exam, String name) {
+    Subject(Exam exam, String name, boolean tts) {
         this.name = name;
         this.parent = exam;
+        this.ttsEnabled = tts;
         this.id = exam.getId() + (exam.getNextSubjectId() << 4);
     }
 
-    public Paper addPaper(String name, int timeLimit, long at) {
-        Paper p = new Paper(this, name, timeLimit, at);
+    Paper addPaper(String name, int timeLimit, long at, Boolean tts) {
+        if (tts == null) {
+            tts = ttsEnabled;
+        }
+        Paper p = new Paper(this, name, timeLimit, at, tts);
         this.papers.add(p);
         return p;
     }
@@ -38,19 +42,14 @@ public class Subject implements StandardObject {
         return papers;
     }
 
-    public Paper[] getVisiblePapers() {
-        if (true || visiblePapers == null) {
-            ArrayList<Paper> list = new ArrayList<>();
-            for (Paper paper : papers) {
-                if (!paper.isHidden()) {
-                    list.add(paper);
-                }
+    Paper[] getVisiblePapers() {
+        ArrayList<Paper> list = new ArrayList<>();
+        for (Paper paper : papers) {
+            if (!paper.isHidden()) {
+                list.add(paper);
             }
-            visiblePapers = list;
-            return list.toArray(new Paper[0]);
-        } else {
-            return visiblePapers.toArray(new Paper[0]);
         }
+        return list.toArray(new Paper[0]);
     }
 
     public String getName() {
@@ -75,5 +74,9 @@ public class Subject implements StandardObject {
 
     public boolean isHidden() {
         return hidden;
+    }
+
+    public boolean isTtsEnabled() {
+        return ttsEnabled;
     }
 }

@@ -1,13 +1,17 @@
 package me.lkp111138.examtimer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ShareActionProvider;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,10 +35,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 import io.netopen.hotbitmapgg.library.view.RingProgressBar;
 import me.lkp111138.examtimer.objects.DataLoader;
+import me.lkp111138.examtimer.objects.Paper;
 
 //ca-app-pub-4459787821471144~8472444057
 //ca-app-pub-4459787821471144/5052073799
@@ -46,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
     long msStarted;
     TextToSpeech tts;
     boolean focus = false;
+    static Paper paper = null;
+    private ShareActionProvider mShareActionProvider;
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,50 +77,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        /*SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        Map<String, ?> all = pref.getAll();
-        String s = "";
-        for (String key : all.keySet()) {
-            try {
-                s += String.format("%s=%s\n", key, pref.getBoolean(key, false));
-            } catch (Exception e) {
-                //
-            }
-            try {
-                s += String.format("%s=%s\n", key, pref.getFloat(key, 0));
-            } catch (Exception e) {
-                //
-            }
-            try {
-                s += String.format("%s=%s\n", key, pref.getInt(key, 0));
-            } catch (Exception e) {
-                //
-            }
-            try {
-                s += String.format("%s=%s\n", key, pref.getLong(key, 0));
-            } catch (Exception e) {
-                //
-            }
-            try {
-                s += String.format("%s=%s\n", key, pref.getString(key, null));
-            } catch (Exception e) {
-                //
-            }
-            try {
-                s += String.format("%s=%s\n", key, pref.getStringSet(key, null));
-            } catch (Exception e) {
-                //
-            }
-        }
-        if (s.length() > 2) {
-            s = s.substring(0, s.length() - 2);
-            Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
-        }*/
         try {
             final InputStream data = getAssets().open(getResources().getString(R.string.json_file));
             DataLoader.load(data, this);
         } catch (IOException|JSONException e) {
-            Toast.makeText(this, "Sorry, we are unable to read the necessary data. " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            StackTraceElement[] elems = e.getStackTrace();
+            StackTraceElement elem = elems[0];
+            int i = 0;
+            while (!elem.getClassName().startsWith("me.lkp111138") && (i < elems.length)) {
+                ++i;
+                elem = elems[i];
+            }
+            Toast.makeText(this, String.format("Sorry, we are unable to read the necessary data. %s at %s:%d (%s)", e.getLocalizedMessage(), elem.getFileName(), elem.getLineNumber(), elem.getClassName()), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             finish();
         }
@@ -153,7 +128,24 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,
+                getResources().getString(R.string.text_share));
+        sendIntent.setType("text/plain");
+        setShareIntent(sendIntent);
+        // Return true to display menu
         return true;
+    }
+
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
     @Override
@@ -164,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.action_share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        getResources().getString(R.string.text_share));
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
             default:
                 break;
         }
@@ -186,18 +185,62 @@ public class MainActivity extends AppCompatActivity {
         final Spinner exam_dropdown = findViewById(R.id.exam_dropdown);
         final Spinner subj_dropdown = findViewById(R.id.subj_dropdown);
         final Spinner paper_dropdown = findViewById(R.id.paper_dropdown);
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         exam_dropdown.setEnabled(false);
         subj_dropdown.setEnabled(false);
         paper_dropdown.setEnabled(false);
         reset.setEnabled(false);
         rbar.setMax(1000);
+        final Paper _paper = paper;
+        String _tts_lang = Locale.getDefault().getLanguage().split("[-_]+")[0];
+        switch (_tts_lang) {
+            case "en":
+            case "zh":
+                break;
+            default:
+                _tts_lang = "en";
+        }
+        final String tts_lang = _tts_lang;
         if (!started) {
             // start
             timer = new CountDownTimer(ms, Math.min(Math.max(50, ms / 200), 1000)) {
+                boolean has_passed_15min_mark = false;
+                boolean has_passed_5min_mark = false;
                 @Override
                 public void onTick(long l) {
                     tv.setText(formatMilli(l));
                     rbar.setProgress((int) (1000 * l / init_ms));
+                    // why dont just fucking use pre-recorded files?
+                    if ((l < 900000) && (l > 899000) && !has_passed_15min_mark && _paper.isTtsEnabled()) {
+                        if (!pref.getBoolean("silent", false) && pref.getBoolean("enable_tts", false)) {
+                            MediaPlayer mp;
+                            switch (tts_lang) {
+                                case "en":
+                                    mp = MediaPlayer.create(MainActivity.this, R.raw.en_15mins);
+                                    mp.start();
+                                    break;
+                                case "zh":
+                                    mp = MediaPlayer.create(MainActivity.this, R.raw.zh_15mins);
+                                    mp.start();
+                                    break;
+                            }
+                        }
+                        has_passed_15min_mark = true;
+                    }
+                    if ((l < 300000) && (l > 299000) && !has_passed_5min_mark && _paper.isTtsEnabled()) {
+                        MediaPlayer mp;
+                        switch (tts_lang) {
+                            case "en":
+                                mp = MediaPlayer.create(MainActivity.this, R.raw.en_5mins);
+                                mp.start();
+                                break;
+                            case "zh":
+                                mp = MediaPlayer.create(MainActivity.this, R.raw.zh_5mins);
+                                mp.start();
+                                break;
+                        }
+                        has_passed_5min_mark = true;
+                    }
                 }
 
                 @Override
@@ -275,7 +318,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setInit_msToCount(long init_msToCount, DataLoader.LOL lol) {
-        lol.hashCode();
+        lol.fuckme();
         this.init_msToCount = init_msToCount;
+    }
+
+    public void setPaper(Paper paper, DataLoader.LOL lol) {
+        lol.fuckme();
+        MainActivity.paper = paper;
+    }
+
+    public static Paper getPaper() {
+        return paper;
     }
 }
