@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     CountDownTimer timer = null;
     boolean started = false;
     long msStarted;
-    TextToSpeech tts;
     boolean focus = false;
     static Paper paper = null;
     private ShareActionProvider mShareActionProvider;
@@ -62,21 +61,6 @@ public class MainActivity extends AppCompatActivity {
         MobileAds.initialize(this, "ca-app-pub-4459787821471144~8472444057");
         AdView adv = findViewById(R.id.adView);
         adv.loadAd(new AdRequest.Builder().build());
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i == 0) {
-                    Locale l = Locale.getDefault();
-                    if (tts.isLanguageAvailable(l) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                        tts.setLanguage(l);
-                        //Toast.makeText(MainActivity.this, String.format("tts locale: %s", l.toString()), Toast.LENGTH_SHORT).show();
-                    } else {
-                        tts.setLanguage(Locale.US);
-                        //Toast.makeText(MainActivity.this, String.format("tts locale: %s", Locale.US.toString()), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
         try {
             final InputStream data = getAssets().open(getResources().getString(R.string.json_file));
             DataLoader.load(data, this);
@@ -92,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             finish();
         }
-    }
-
-    public void onDestroy() {
-        super.onDestroy();
-        tts.shutdown();
     }
 
     @Override
